@@ -14,19 +14,22 @@ datasource db {
 }
 
 model Todo {
-  id          Int        @id @default(autoincrement())
-  task        String
-  description String?
-  status      TodoStatus
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
+  id Int @default(autoincrement()) @id
+  title String
+  desc String
+  status TodoStatus
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  userEmail String?
+  user User? @relation(fields: [userEmail], references: [email])
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  email    String @unique
-  password String
-  name     String
+  id Int @default(autoincrement()) @id
+  email String @unique
+  password String 
+  name String
+  todos Todo[]
 }
 
 enum TodoStatus {

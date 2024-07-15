@@ -1,11 +1,14 @@
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class CreateTodoDto {
+  @ApiProperty()  
   @IsNotEmpty()
   @IsString()
-  task: string;
+  title: string;
 
-  @IsOptional()
+  @ApiProperty()
+  @IsNotEmpty()
   @IsString()
-  description?: string;
+  desc: string;
 }
